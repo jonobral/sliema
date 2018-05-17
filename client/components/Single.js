@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import Photo from './Photo';
 import Comments from './Comments';
+import Spinner from './Spinner';
 
 class Single extends Component {
   render() {
-    const { postId } = this.props.params;
-    // index of the post
-    const i = this.props.posts.findIndex((post) => post.code === postId);
-    const post = this.props.posts[i];
+    const { folderId, photoId } = this.props.params;
+    // index of the photo
+    const i = this.props.photos[folderId].findIndex((photo) => photo.id === photoId);
+    const photo = this.props.photos[folderId][i];
 
-    const postComments = this.props.comments[postId] || [];
+    const photoComments = this.props.comments[photoId] || [];
 
-    // get us the post
+    // get us the photo or spinner
     return (
-      <div className="single-photo">
-        <Photo i={i} post={post} {...this.props}/>
-        <Comments postComments={postComments} {...this.props}/>
-      </div>
+      photo ? <div className="single-photo">
+        <Photo key={i} i={i} photo={photo} {...this.props} folderId={folderId}/>
+        <Comments photoComments={photoComments} {...this.props}/>
+      </div> :
+        <Spinner />
     )
   }
 };

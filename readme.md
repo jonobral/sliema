@@ -1,6 +1,6 @@
-# Learn Redux
+# React + Redux + Dropbox API
 
-A simple React + Redux implementation. This will be turned into a free video series once the app is totally fleshed out.
+A simple React + Redux implementation. This app connects with Dropbox API in order to get an images list.
 
 ## Running
 

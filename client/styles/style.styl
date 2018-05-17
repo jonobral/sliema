@@ -1,9 +1,39 @@
 @import '_normalize.styl'
 @import '_typography.styl'
 @import '_animations.styl'
+@import '_spinner.styl'
+@import '_lock.styl'
 
 body
   background offwhite
+
+.tabs
+  display: flex;
+  border-bottom: 1px solid #D7DBDD;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+
+.react-tabs__tab
+  cursor: pointer;
+  color: #16A2D7;
+  font-size: 2rem;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent;
+  &--selected  {
+    border-bottom-color: #4EBBE4;
+  }
+  @media (min-width: 400px)
+    font-size: 2rem;
+    padding: 5px 15px;
+
+  @media (min-width: 500px)
+    font-size: 3rem;
+    padding: 5px 15px;
+
+  @media (min-width: 600px)
+    font-size: 3rem;
+    padding: 5px 30px;
 
 .photo-grid
   display flex
@@ -12,7 +42,10 @@ body
   margin 0 auto
 
 .grid-figure
-  flex-basis calc(33.333% - 4rem)
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-basis calc(100% - 4rem)
   flex-grow 1
   flex-shrink 0
   margin 0 2rem 2rem 2rem
@@ -21,26 +54,44 @@ body
   background white
   box-shadow 0 0 0 5px rgba(0,0,0,0.03);
   position relative
+  @media (min-width: 600px)
+    flex-basis calc(50% - 4rem)
+  
+  @media (min-width: 900px)
+    flex-basis calc(33.333% - 4rem)
+  
 
 .single-photo
   @extend .grid-figure
   max-width 900px
   margin 0 auto
   display flex
+  flex-flow: column nowrap
   background white
   .grid-figure
     box-shadow none
-    margin 0 2rem 0 0
     border 0
     padding 0
-    flex 1 0 60%
-    max-width 60%
+    margin: 0 0 2rem 0;
+    max-width: 100%;
+    flex: 1 0 100%;
+    @media (min-width: 600px)
+      margin 0 2rem 0 0
+      flex 1 0 60%
+      max-width 60%
+
   .comments
-    flex 1 0 40%
-    max-width 40%
+    max-width: 100%
+    flex: 1 0 100%
+    @media (min-width: 600px)
+      flex 1 0 40%
+      max-width 40%
   .grid-photo
     width 100%
     margin 0
+  @media (min-width: 600px) {
+    flex-flow: row nowrap
+  }
 
 .grid-photo
   width calc(100% + 4rem)
@@ -61,7 +112,7 @@ body
   border-bottom 1px solid lightgrey
   padding 0.5rem 0
   p
-    font-size 1.2rem
+    font-size 1.9rem
     margin 0
   strong
     color blue
@@ -69,17 +120,26 @@ body
   &:hover
     .remove-comment
       opacity 1
- 
+
 .comment-form 
   input, textarea
     width 100%
     border 0
-    font-size 1.3rem
+    font-size 1.9rem
     padding 1rem 0
     border-bottom 1px solid lightgrey
     outline none
     resize vertical
 
+.button-form
+  cursor: pointer
+  float: right
+  padding: 2px
+  width: 150px
+  margin: 2px
+
+.comment-invalid
+  border:1px solid red !important
 
 .grid-photo-wrap
   position relative
@@ -113,7 +173,7 @@ button, .button
   text-decoration none
   padding 5px
   text-align center
-  font-size 15px
+  font-size 1.9rem
   color blue
   transition all 0.2s
   box-sizing padding-box
@@ -132,6 +192,7 @@ button, .button
   display inline-block
   border-radius 50%
   position relative
+  margin-right 5px
   &:after
     display inline-block
     position absolute
@@ -144,6 +205,12 @@ button, .button
     top 30%
     left 0
 
-  
-  
-
+footer 
+  display: block;
+  margin: 20px 0 20px 0;
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: italic;
+  a
+    color: #125688;
+    text-decoration: none;

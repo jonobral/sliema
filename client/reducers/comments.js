@@ -2,8 +2,10 @@ function postComments(state = [], action) {
   switch (action.type) {
     case 'ADD_COMMENT':
       return [...state, {
-        user: action.author,
-        text: action.comment
+        id: action.commentId,
+        author: action.author,
+        comment: action.comment,
+        isLocked: false
       }];
     case 'REMOVE_COMMENT':
       return [
@@ -17,10 +19,28 @@ function postComments(state = [], action) {
 }
 
 function comments(state = [], action) {
-  if (typeof action.post !== undefined) {
+  if (action.photoId) {
     return {
       ...state,
-      [action.postId]: postComments(state[action.postId], action)
+      [action.photoId]: postComments(state[action.photoId], action)
+    }
+  } else {
+    if (action.type === 'LOAD_COMMENTS') {
+      return {
+        ...state,
+        ...action.payload.reduce((result, comment) => ({
+          ...result,
+          [comment.photoId]: [
+            ...(result[comment.photoId] || []),
+            {
+              id: comment._id,
+              author: comment.author,
+              comment: comment.comment,
+              isLocked: comment.isLocked
+            }
+          ]}),
+          {})
+      }
     }
   }
   return state;

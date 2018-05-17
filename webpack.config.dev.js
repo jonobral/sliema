@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var env = require(__dirname + '/env');
 
 module.exports = {
   devtool: 'source-map',
@@ -13,6 +14,9 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': env.getEnvVariables().parsed
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],

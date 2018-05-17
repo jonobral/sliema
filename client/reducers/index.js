@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import posts from './posts';
+import photos from './photos';
 import comments from './comments';
+import folders from './folders';
 
 const rootReducer = combineReducers({
-  posts,
+  photos,
   comments,
+  folders,
   routing: routerReducer
 });
 

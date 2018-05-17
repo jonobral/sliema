@@ -1,27 +1,64 @@
+export function fetchPostsRequest(){
+  return {
+    type: 'FETCH_REQUEST'
+  }
+}
+
+export function fetchPostsError() {
+  return {
+    type: 'FETCH_ERROR'
+  }
+}
+
+export function fetchDatabaseRecords(payload, folderId) {
+  return {
+    type: 'DATABASE_SUCCESS',
+    payload,
+    folderId
+  }
+}
+
+export function setFolders(payload) {
+  return {
+    type: 'SET_FOLDERS',
+    payload
+  }
+}
+
 // increment likes
-export function increment(index) {
+export function increment(index, likes, folderId) {
   return {
     type: 'INCREMENT_LIKES',
-    index
+    index,
+    likes,
+    folderId
   }
 }
 
 // add comment
-export function addComment(postId, author, comment) {
-  console.log('dispatch comment!');
+export function addInitialComments(payload) {
+  return {
+    type: 'LOAD_COMMENTS',
+    payload
+  }
+}
+
+// add comment
+export function addComment(photoId, author, comment, commentId) {
   return {
     type: 'ADD_COMMENT',
-    postId,
+    photoId,
     author,
-    comment
+    comment,
+    commentId
   }
 }
 
 // remove comment
-export function removeComment(postId, i) {
+export function removeComment(photoId, i) {
   return {
     type: 'REMOVE_COMMENT',
     i,
-    postId
+    photoId
   }
 }
