@@ -38,6 +38,10 @@ class PhotoGrid extends Component {
       this._asyncRequest = dropboxController.getPhotos({folder: folderPath})
         .then((payload) => {
           this._asyncRequest = null;
+          if (!payload.length) { 
+            this.props.displayError('NO_PHOTOS', 'No photos available yet!');
+            return;
+          }
           this._asyncRequest = axios.all([this.createPhotos(payload), this.getComments()])
             .then(axios.spread((photos, comments) => {
               this._asyncRequest = null;
@@ -52,6 +56,7 @@ class PhotoGrid extends Component {
 
   render() {
     const { id: folderId, name: folderName } = this.props.folders[this.state.tabIndex] || {id: -1};
+    console.log(this.props.photos);
     return (
       this.props.folders ? 
       <Tabs defaultIndex={this.state.tabIndex} onSelect={(tabIndex) => this.setState({ tabIndex }, this.fetchPhotos(tabIndex))}>
@@ -63,7 +68,9 @@ class PhotoGrid extends Component {
         {this.props.folders.map((folder, folderIndex) => 
           <TabPanel key={folderIndex}>
             <div className="photo-grid">
-              {this.props.photos[folderId] ? 
+              {this.props.errors['NO_PHOTOS'] ?
+                <span className="no-photos-error"> {this.props.errors['NO_PHOTOS']} </span>
+              : this.props.photos[folderId] ? 
                 this.props.photos[folderId].map((photo, i) => 
                   <Photo 
                     {...this.props}

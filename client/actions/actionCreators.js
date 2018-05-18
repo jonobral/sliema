@@ -62,3 +62,11 @@ export function removeComment(photoId, i) {
     photoId
   }
 }
+
+export function displayError(code, description) {
+  return {
+    type: 'SET_ERROR',
+    code,
+    description
+  }
+}

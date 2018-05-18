@@ -21,7 +21,6 @@ class Main extends Component {
         this._asyncRequest = this.createFolders(payload)
           .then((payload) => {
             this._asyncRequest = null;
-            // calling the dispatcher
             this.props.setFolders(payload.data);
           })
           .catch(console.error);

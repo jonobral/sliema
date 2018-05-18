@@ -1,4 +1,4 @@
-# React + Redux + Dropbox API
+# React + Redux + Dropbox API + MongoDB
 
 A simple React + Redux implementation. This app connects with Dropbox API in order to get an images list.
 

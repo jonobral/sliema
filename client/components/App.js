@@ -7,7 +7,8 @@ function mapStateToProps(state) {
   return {
     photos: state.photos,
     comments: state.comments,
-    folders: state.folders
+    folders: state.folders,
+    errors: state.errors
   }
 }
 

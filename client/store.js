@@ -9,7 +9,8 @@ import rootReducer from './reducers/index';
 const defaultState = {
   photos: [],
   comments: [],
-  folders: []
+  folders: [],
+  errors: {}
 };
 
 const enhancers = compose(

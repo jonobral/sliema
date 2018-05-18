@@ -32,14 +32,25 @@ body
     padding: 5px 15px;
 
   @media (min-width: 600px)
-    font-size: 3rem;
+    font-size: 4rem;
     padding: 5px 30px;
 
 .photo-grid
   display flex
   flex-wrap wrap
+  justify-content: center;
   max-width 1200px
   margin 0 auto
+  span.no-photos-error
+    font-size: 2rem;
+    color: #16a2d7;
+    padding: 5rem;
+
+    @media (min-width: 500px)
+      font-size: 3rem;
+
+    @media (min-width: 600px)
+      font-size: 4rem;
 
 .grid-figure
   display: flex;

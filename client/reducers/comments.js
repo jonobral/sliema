@@ -12,7 +12,7 @@ function postComments(state = [], action) {
         ...state.slice(0, action.i),
         ...state.slice(action.i + 1)
       ]
-    defailt:
+    default:
       return state;
   }
   return state;
