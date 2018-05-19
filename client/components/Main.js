@@ -34,11 +34,20 @@ class Main extends Component {
     }
   }
 
+  getRouteToHomePage() {
+    const { folderId } = this.props.params;
+
+    if (folderId) {
+      return `/${folderId}`;
+    }
+    return '/';
+  }
+
   render() {
     return (
       <div>
         <h1>
-          <Link to="/">Eurotrip 2018</Link>
+          <Link to={this.getRouteToHomePage()}>Eurotrip 2018</Link>
         </h1>
         {React.cloneElement(this.props.children, this.props)}
         <Footer title={<a href='http://jonobral.com' target='_blank'>By jonobral.com</a>}/>

@@ -8,6 +8,9 @@ function errors(state = [], action) {
         [action.code]: action.description
       }
 
+    case 'CLEAR_ERROR':
+      return {};
+
     default:
       return state;
   }

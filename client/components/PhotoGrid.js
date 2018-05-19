@@ -9,7 +9,12 @@ class PhotoGrid extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { tabIndex: 0 };
+    const { folderId } = this.props.params;
+    let defaultIndex = 0;
+    if (this.props.folders.length > 0) {
+      defaultIndex = this.props.folders.findIndex((folder) => folder.id === folderId);
+    }
+    this.state = { tabIndex: defaultIndex };
   }
 
   createPhotos(payload) {
@@ -33,6 +38,7 @@ class PhotoGrid extends Component {
   }
 
   fetchPhotos(tabIndex) {
+    this.props.clearError('NO_PHOTOS');
     const { id: folderId, path: folderPath } = this.props.folders[tabIndex];
     if (!this.props.photos[folderId]) {
       this._asyncRequest = dropboxController.getPhotos({folder: folderPath})
@@ -56,10 +62,11 @@ class PhotoGrid extends Component {
 
   render() {
     const { id: folderId, name: folderName } = this.props.folders[this.state.tabIndex] || {id: -1};
-    console.log(this.props.photos);
     return (
       this.props.folders ? 
-      <Tabs defaultIndex={this.state.tabIndex} onSelect={(tabIndex) => this.setState({ tabIndex }, this.fetchPhotos(tabIndex))}>
+      <Tabs defaultIndex={this.state.tabIndex} onSelect={(tabIndex) => 
+          this.setState({ tabIndex }, 
+          this.fetchPhotos(tabIndex))}>
         <TabList className="tabs">
           {this.props.folders.map((folder, i) => 
             <Tab key={i}>{folder.name}</Tab>

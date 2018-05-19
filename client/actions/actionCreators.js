@@ -70,3 +70,10 @@ export function displayError(code, description) {
     description
   }
 }
+
+export function clearError(code) {
+  return {
+    type: 'CLEAR_ERROR',
+    code
+  }
+}
